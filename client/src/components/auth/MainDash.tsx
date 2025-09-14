@@ -3,6 +3,67 @@ import { useNavigate } from "react-router-dom";
 import heroImage from "../../assets/hero-waste-management.png";
 import { MainHeader } from "../layout/MainHeader";
 import { Button } from "../ui/Button";
+import { RoleCard } from "../../components/ui/Role-card";
+
+const roles = [
+  {
+    id: "citizen",
+    title: "Citizen Portal",
+    description: "Engage in responsible waste management and earn rewards",
+    icon: Users,
+    variant: "citizen" as const,
+    features: [
+      "Waste segregation training",
+      "AI-powered classification",
+      "Recycling marketplace",
+      "Facility locator & QR scanning",
+      "Green credits & rewards",
+    ],
+  },
+  {
+    id: "worker",
+    title: "Waste Worker App",
+    description: "Field execution tools for waste collection teams",
+    icon: HardHat,
+    variant: "worker" as const,
+    features: [
+      "Daily route optimization",
+      "Offline-first operation",
+      "QR code scanning",
+      "Emergency SOS alerts",
+      "Earnings & incentive tracking",
+    ],
+  },
+  {
+    id: "champion",
+    title: "Green Champion Portal",
+    description: "Local supervision with ML-powered insights",
+    icon: Shield,
+    variant: "champion" as const,
+    features: [
+      "Citizen error analysis",
+      "Real-time monitoring",
+      "Route performance tracking",
+      "Complaint management",
+      "Local action controls",
+    ],
+  },
+  {
+    id: "government",
+    title: "ULB Government Dashboard",
+    description: "Macro governance and policy analytics platform",
+    icon: Building2,
+    variant: "government" as const,
+    features: [
+      "City-wide compliance tracking",
+      "Predictive waste analytics",
+      "Policy impact monitoring",
+      "Cross-ward comparisons",
+      "Automated reporting",
+    ],
+  },
+];
+
 
 
 export default function Index() {
@@ -52,6 +113,35 @@ export default function Index() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent rounded-2xl" />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Role Selection */}
+      <section className="py-16 lg:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+              Choose Your Dashboard
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Access role-specific tools designed for your needs in the waste
+              management ecosystem
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {roles.map((role) => (
+              <RoleCard
+                key={role.id}
+                title={role.title}
+                description={role.description}
+                icon={role.icon}
+                features={role.features}
+                variant={role.variant}
+                onSelect={() => navigate(`/auth?role=${role.id}`)}
+              />
+            ))}
           </div>
         </div>
       </section>

@@ -17,9 +17,31 @@ function AppContent() {
   
    const { user, loading } = useAuth(); // make sure useAuth returns loading state
 
-   if (loading) {
-     return <div className="text-black justify-center">Loading...</div>;
-   }
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 dark:from-gray-900 dark:to-gray-800">
+        {/* Animated recycle icon */}
+        <div className="relative">
+          <div className="w-20 h-20 rounded-full border-4 border-green-500 border-t-transparent animate-spin"></div>
+          <span className="absolute inset-0 flex items-center justify-center text-3xl">
+            ♻️
+          </span>
+        </div>
+
+        {/* Animated text */}
+        <p className="mt-6 text-lg font-semibold text-gray-700 dark:text-gray-300 animate-pulse">
+          Recycling your data...
+        </p>
+
+        {/* Progress dots */}
+        <div className="flex space-x-2 mt-4">
+          <span className="w-3 h-3 bg-green-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
+          <span className="w-3 h-3 bg-green-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
+          <span className="w-3 h-3 bg-green-500 rounded-full animate-bounce" />
+        </div>
+      </div>
+    );
+  }
 
 
   return (
