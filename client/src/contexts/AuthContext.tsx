@@ -84,11 +84,16 @@ export interface User {
   role: "citizen" | "worker" | "champion" | "government";
   email: string;
   token?: string;
+  greenCredits?: number;
+  level?: number;
+  avatar?: string;
+  location?: string;
 }
+
 
 interface AuthContextType {
   user: User | null;
-  register: (name: string, email: string, password: string, role: string) => Promise<boolean>;
+  register: (name: string, email: string, password: string, role: string, location: string) => Promise<boolean>;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   loading: boolean;
@@ -101,13 +106,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(false);
 
   // REGISTER
-  const register = async (name: string, email: string, password: string, role: string) => {
+  const register = async (
+    name: string,
+    email: string,
+    password: string,
+    role: string,
+    location: string
+  ) => {
     setLoading(true);
     try {
       const res = await fetch("http://localhost:3000/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, role }),
+        body: JSON.stringify({ name, email, password, role , location}),
       });
       // const data = await res.json();
       setLoading(false);

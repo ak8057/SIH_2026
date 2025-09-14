@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Bell, Moon, Sun, LogOut, Menu } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -6,6 +6,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 export default function Header() {
   const { user, logout } = useAuth();
   const { isDark, toggleTheme } = useTheme();
+   const [expanded, setExpanded] = useState(false);
 
   return (
     <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3">
@@ -57,7 +58,14 @@ export default function Header() {
               <p className="text-sm font-medium text-gray-800 dark:text-white">
                 {user?.name}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p
+                // className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-[150px] cursor-pointer"
+                onClick={() => setExpanded(!expanded)}
+                className={`text-xs text-gray-500 dark:text-gray-400 cursor-pointer ${
+                  expanded ? "" : "truncate max-w-[150px]"
+                }`}
+                title={user?.location} // shows full text on hover
+              >
                 {user?.location}
               </p>
             </div>

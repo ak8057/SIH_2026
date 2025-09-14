@@ -4,6 +4,18 @@ import heroImage from "../../assets/hero-waste-management.png";
 import { MainHeader } from "../layout/MainHeader";
 import { Button } from "../ui/Button";
 import { RoleCard } from "../../components/ui/Role-card";
+import { Footer } from "../layout/Footer";
+import { ProductBanner } from "../layout/ProductBanner";
+import {
+  banner1,
+  banner2,
+  banner3,
+  banner4,
+} from "../../assets/index";
+import { Stack } from "@mui/material";
+
+const bannerImages = [banner1, banner3, banner2, banner4];
+
 
 const roles = [
   {
@@ -68,13 +80,27 @@ const roles = [
 
 export default function Index() {
    const navigate = useNavigate();
-
+   const is600 = window.innerWidth <= 600; // Example: Define is600 based on screen width
+    const is800 = window.innerWidth <= 800;
+    const is1200 = window.innerWidth <= 1200;
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-accent/10">
       <MainHeader />
 
+      {!is600 && (
+        <Stack
+          sx={{
+            width: "100%",
+            height: is800 ? "300px" : is1200 ? "400px" : "500px",
+           
+          }}
+        >
+          <ProductBanner images={bannerImages} />
+        </Stack>
+      )}
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
+      <section className="relative  overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-green-200/40 via-transparent to-emerald-400/40 pointer-events-none" />
 
         <div className="container mx-auto px-4 py-16 lg:py-24">
@@ -105,7 +131,7 @@ export default function Index() {
               </div>
             </div>
 
-            <div className="relative">
+            <div className="pt-48 relative">
               <img
                 src={heroImage}
                 alt="Smart waste management ecosystem"
@@ -190,6 +216,7 @@ export default function Index() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
